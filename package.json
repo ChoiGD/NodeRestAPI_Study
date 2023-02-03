@@ -1,0 +1,22 @@
+{
+  "name": "noderestapi_study",
+  "version": "1.0.0",
+  "description": "Study",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChoiGD/NodeRestAPI_Study.git"
+  },
+  "author": "ChoiGD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChoiGD/NodeRestAPI_Study/issues"
+  },
+  "homepage": "https://github.com/ChoiGD/NodeRestAPI_Study#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

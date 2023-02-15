@@ -79,6 +79,7 @@ exports.getPost = (req, res, next) => {
 exports.updatePost = (req, res, next) => {
     const postId = req.params.postId;
     const errors = validationResult(req);
+    //오류가 있는지 확인하고 오류가 있다면 아래 메시지를 던진다
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, entered data is incorrect.');
         error.statusCode = 422;
@@ -120,6 +121,32 @@ exports.updatePost = (req, res, next) => {
             next(err);
 
         })
+}
+
+exports.deletePost = (req, res, next) =>{
+    const postId = req.params.postId;
+    Post.findById(postId)
+        .then(post =>{
+            if (!post) {
+                const error = new Error('Could not find post.');
+                error.statusCode = 404;
+                throw error;
+            }
+            // Check logged in user
+            clearImage(post.imageUrl);
+            return Post.findByIdAndRemove(postId);
+        })
+        .then(result =>{
+            console.log(result);
+            res.status(200).json({message:'Deleted post.'})
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+
+        });
 }
 
 const clearImage = filePath =>{
